@@ -12,7 +12,6 @@ import machado.ramon.basiccrud.model.Category;
 import machado.ramon.basiccrud.service.CategoryService;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 public class CategoryTests {
 
   @Autowired
