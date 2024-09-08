@@ -87,7 +87,9 @@ public class Product implements Serializable {
   }
 
   public Category getCategory() {
-    category.setProducts(null);
+    if (category != null) {
+      category.setProducts(null);
+    }
     return category;
   }
 

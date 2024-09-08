@@ -27,7 +27,9 @@ public class Category implements Serializable {
   private List<Product> products;
 
   public List<Product> getProducts() {
-    products.forEach(product -> product.setCategory(null));
+    if (products != null) {
+      products.forEach(product -> product.setCategory(null));
+    }
     return products;
   }
 
