@@ -34,7 +34,7 @@ public class CategoryService {
     }
     return categoryRepository.save(category);
   }
-  public Category update(UUID id, Category category) {
+  public Category update(UUID id, Category category) throws RuntimeException{
     Category categoryToUpdate = findById(id);
     categoryToUpdate.setName(category.getName());
     return categoryRepository.save(categoryToUpdate);
