@@ -2,11 +2,12 @@ version: "3.8"
 
 services:
   mysql:
-    image: mysql:8.0
+    image: mysql:8.0.33
     restart: always
     environment:
-      - MYSQL_DATABASE = $MYSQL_DATABASE
-      - MYSQL_ROOT_PASSWORD = $MYSQL_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_ROOT_HOST: '%'
     ports:
       - "3306:3306"
     volumes:
@@ -24,9 +25,9 @@ services:
       dockerfile: Dockerfile
     container_name: spring-app
     environment:
-      - MYSQL_DATABASE = $MYSQL_DATABASE
-      - MYSQL_USER = $MYSQL_USER
-      - MYSQL_PASSWORD = $MYSQL_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
     ports:
       - "8090:8090"
     depends_on:
