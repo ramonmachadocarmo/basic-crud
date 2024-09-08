@@ -3,7 +3,6 @@ package machado.ramon.basiccrud.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.micrometer.core.ipc.http.HttpSender.Response;
 import machado.ramon.basiccrud.model.Product;
 import machado.ramon.basiccrud.model.ProductDTO;
 import machado.ramon.basiccrud.service.ProductService;
