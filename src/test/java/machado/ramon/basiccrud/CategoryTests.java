@@ -61,6 +61,6 @@ public class CategoryTests {
     categoryService.create(categoryOk2());
     categoryService.create(categoryOk3());
 
-    assertEquals(2, categoryService.findAll().size());
+    assertEquals(3, categoryService.findAll().size());
   }
 }
