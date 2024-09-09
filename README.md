@@ -9,6 +9,10 @@
 - Docker
 - Docker-compose
 
+### Configuração
+
+Para alteração de variáveis de ambiente, edite o arquivo .env
+
 ### Como executar?
 
 Rodar projeto com docker-compose
