@@ -1,9 +1,10 @@
 package machado.ramon.basiccrud.service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import machado.ramon.basiccrud.model.Category;
@@ -17,8 +18,8 @@ public class CategoryService {
     this.categoryRepository = categoryRepository;
   }
 
-  public List<Category> findAll() {
-    return categoryRepository.findAll();
+  public Page<Category> findAll(PageRequest pageRequest) {
+    return categoryRepository.findAll(pageRequest);
   }
 
   public Category findById(UUID id) {

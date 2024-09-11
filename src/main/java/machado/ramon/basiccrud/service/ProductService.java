@@ -1,6 +1,8 @@
 package machado.ramon.basiccrud.service;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import machado.ramon.basiccrud.model.Category;
@@ -33,7 +35,7 @@ public class ProductService {
   }
 
   public Product update(Product product, UUID id) {
-    Optional<Product> productOptional = productRepository.findById(id );
+    Optional<Product> productOptional = productRepository.findById(id);
     if (productOptional.isEmpty())
       throw new RuntimeException("Product not found");
 
@@ -50,11 +52,12 @@ public class ProductService {
   }
 
   public void deleteAll() {
-    productRepository.deleteAll();;
+    productRepository.deleteAll();
+    ;
   }
 
-  public List<Product> findAll() {
-    return productRepository.findAll();
+  public Page<Product> findAll(PageRequest pageRequest) {
+    return productRepository.findAll(pageRequest);
   }
 
   public Product findById(UUID id) {
@@ -65,12 +68,16 @@ public class ProductService {
     return product.get();
   }
 
-  public List<Product> findByName(String name) {
-    return productRepository.findByNameContainingIgnoreCase(name);
+  private List<Product> findByName(String name) {
+    return productRepository.findByName(name);
   }
 
-  public List<Product> findByDescription(String description) {
-    return productRepository.findByDescriptionContainingIgnoreCase(description);
+  public Page<Product> findByName(String name, PageRequest pageRequest) {
+    return productRepository.findByNameContainingIgnoreCase(name, pageRequest);
+  }
+
+  public Page<Product> findByDescription(String description, PageRequest pageRequest) {
+    return productRepository.findByDescriptionContainingIgnoreCase(description, pageRequest);
   }
 
   private void isValidProduct(Product product) {

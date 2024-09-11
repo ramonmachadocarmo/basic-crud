@@ -1,6 +1,7 @@
 package machado.ramon.basiccrud.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import machado.ramon.basiccrud.model.Product;
@@ -11,6 +12,9 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,8 +35,11 @@ public class ProductController {
   }
 
   @GetMapping("/findAll")
-  public ResponseEntity<List<Product>> findAll() {
-    return ResponseEntity.ok().body(productService.findAll());
+  public ResponseEntity<Page<Product>> findAll(@RequestParam(value = "offset", defaultValue = "0") Integer offset,
+      @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+      @RequestParam(value = "sortBy", defaultValue = "id") String sortBy) {
+
+    return ResponseEntity.ok().body(productService.findAll(PageRequest.of(offset, pageSize, Sort.by(sortBy))));
   }
 
   @GetMapping("/findById/{id}")
@@ -45,13 +52,20 @@ public class ProductController {
   }
 
   @GetMapping("/findByName/{name}")
-  public ResponseEntity<List<Product>> findByName(@PathVariable String name) {
-    return ResponseEntity.ok().body(productService.findByName(name));
+  public ResponseEntity<Page<Product>> findByName(@PathVariable String name,
+      @RequestParam(value = "offset", defaultValue = "0") Integer offset,
+      @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+      @RequestParam(value = "sortBy", defaultValue = "id") String sortBy) {
+    return ResponseEntity.ok().body(productService.findByName(name, PageRequest.of(offset, pageSize, Sort.by(sortBy))));
   }
 
   @GetMapping("/findByDescription/{description}")
-  public ResponseEntity<List<Product>> findByDescription(@PathVariable String description) {
-    return ResponseEntity.ok().body(productService.findByDescription(description));
+  public ResponseEntity<Page<Product>> findByDescription(@PathVariable String description,
+      @RequestParam(value = "offset", defaultValue = "0") Integer offset,
+      @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+      @RequestParam(value = "sortBy", defaultValue = "id") String sortBy) {
+    return ResponseEntity.ok()
+        .body(productService.findByDescription(description, PageRequest.of(offset, pageSize, Sort.by(sortBy))));
   }
 
   @PostMapping("/create")
@@ -75,6 +89,7 @@ public class ProductController {
       return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
     }
   }
+
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<Object> delete(@PathVariable UUID id) {
     try {
@@ -84,6 +99,7 @@ public class ProductController {
       return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
     }
   }
+
   @DeleteMapping("/deleteAll")
   public ResponseEntity<Object> deleteAll() {
     productService.deleteAll();

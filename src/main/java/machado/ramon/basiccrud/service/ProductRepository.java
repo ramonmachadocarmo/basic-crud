@@ -2,6 +2,8 @@ package machado.ramon.basiccrud.service;
 
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +13,9 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, UUID> {
 
-  List<Product> findByNameContainingIgnoreCase(String name);
-  List<Product> findByDescriptionContainingIgnoreCase(String description);
+  Page<Product> findByNameContainingIgnoreCase(String name, PageRequest pageRequest);
+
+  Page<Product> findByDescriptionContainingIgnoreCase(String description, PageRequest pageRequest);
+
+  List<Product> findByName(String name);
 }
