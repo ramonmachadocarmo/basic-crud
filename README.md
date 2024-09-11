@@ -17,6 +17,8 @@ Para alteração de variáveis de ambiente, edite o arquivo .env
 
 Rodar projeto com docker-compose
 
+ >URL BASE: localhost:8090/
+
 ```bash
 docker-compose up -d
 ```
