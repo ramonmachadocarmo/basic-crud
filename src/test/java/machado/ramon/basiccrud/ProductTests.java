@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import machado.ramon.basiccrud.model.Category;
 import machado.ramon.basiccrud.model.Product;
@@ -31,11 +33,11 @@ public class ProductTests {
   public void setup() {
     category = new Category();
     category.setName("Teste");
-    List<Category> list = categoryService.findAll();
+    Page<Category> list = categoryService.findAll(PageRequest.of(0, 1));
     if(list.isEmpty()){
       category = categoryService.create(category);
     }else{
-      category = list.get(0);
+      category = list.getContent().get(0);
     }
   }
 
