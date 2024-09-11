@@ -8,7 +8,6 @@ import machado.ramon.basiccrud.model.Product;
 import machado.ramon.basiccrud.model.ProductDTO;
 import machado.ramon.basiccrud.service.ProductService;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;

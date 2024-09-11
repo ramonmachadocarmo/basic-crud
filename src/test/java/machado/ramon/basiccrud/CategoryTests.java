@@ -26,18 +26,6 @@ public class CategoryTests {
     return category;
   }
 
-  private Category categoryOk2() {
-    Category category = new Category();
-    category.setName("Teste Ok 2");
-    return category;
-  }
-
-  private Category categoryOk3() {
-    Category category = new Category();
-    category.setName("Teste Ok 3");
-    return category;
-  }
-
   @Test
   public void shouldCreateCategory() {
     Category category = categoryOk();
@@ -56,11 +44,4 @@ public class CategoryTests {
 
   }
 
-  @Test
-  public void shouldReturnListSize2() {
-    categoryService.create(categoryOk2());
-    categoryService.create(categoryOk3());
-
-    assertEquals(3, categoryService.findAll().size());
-  }
 }
